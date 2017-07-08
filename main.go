@@ -1,31 +1,34 @@
-package main
+package updatefile
 
 import (
 	"fmt"
 	"log"
-	"os"
 
 	"github.com/pkg/sftp"
+	qrcode "github.com/skip2/go-qrcode"
 	"golang.org/x/crypto/ssh"
 )
 
 func main() {
 	fmt.Println("hello updatefile project!")
-	args := os.Args
-	if len(args) < 2 {
-		//不带参数，显示说明
-		usage()
-	} else {
-		//带参数
-		usage()
-		fmt.Println(args)
-	}
+	// args := os.Args
+	// if len(args) < 2 {
+	// 	//不带参数，显示说明
+	// 	usage()
+	// } else {
+	// 	//带参数
+	// 	usage()
+	// 	fmt.Println(args)
+	// }
 	// SSH("sybase", "sybase123", "192.168.216.129:22")
-	ftpdemo()
+	// ftpdemo()
 	// h := md5.New()
 	// h.Write([]byte(args[1]))
 	// fmt.Println(h.Sum(nil))
 	// fmt.Println(hex.EncodeToString(h.Sum(nil)))
+
+	//测试二维码生成
+	genqrcodepng("qrcode.png", "showsomethig", qrcode.Medium)
 }
 
 func usage() {
