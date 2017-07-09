@@ -1,4 +1,4 @@
-package updatefile
+package main
 
 import (
 	"fmt"
