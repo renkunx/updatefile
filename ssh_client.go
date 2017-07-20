@@ -9,8 +9,8 @@ import (
 )
 
 const (
-	USER     = "mis"
-	PASSWORD = "mis123"
+	USER     = "sybase"
+	PASSWORD = "sybase123"
 	HOST     = "192.168.216.129"
 )
 
@@ -40,7 +40,8 @@ func sshclientfunc() {
 	// the remote side using the Run method.
 	var b bytes.Buffer
 	session.Stdout = &b
-	if err := session.Run("/usr/bin/whoami"); err != nil {
+
+	if err := session.Run("route"); err != nil {
 		log.Fatal("Failed to run: " + err.Error())
 	}
 	fmt.Println(b.String())
