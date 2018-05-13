@@ -2,38 +2,25 @@ package main
 
 import (
 	"fmt"
+)
 
-	qrcode "github.com/skip2/go-qrcode"
+const (
+	USER     = "sybase"
+	PASSWORD = "sybase123"
+	HOST     = "192.168.216.129"
 )
 
 func main() {
-	fmt.Println("hello updatefile project!")
-	// args := os.Args
-	// if len(args) < 2 {
-	// 	//不带参数，显示说明
-	// 	usage()
-	// } else {
-	// 	//带参数
-	// 	usage()
-	// 	fmt.Println(args)
-	// }
-
-	// h := md5.New()
-	// h.Write([]byte(args[1]))
-	// fmt.Println(h.Sum(nil))
-	// fmt.Println(hex.EncodeToString(h.Sum(nil)))
-
-	//测试二维码生成
-	genqrcodepng("qrcode.png", "showsomethig", qrcode.Medium)
-
-	//测 ftp
-	// SSH("sybase", "sybase123", "192.168.216.129:22")
-	// ftpdemo()
-	sshclientfunc()
-}
-
-func usage() {
-	fmt.Println("这是一个依托 ftp 和 sftp 进行文件更新的程序")
-	fmt.Println("                  Author By BluePrint")
 	fmt.Println("Application  process ... ...")
+	//建立 ssh 连接
+	client := sshclientfunc(USER, PASSWORD, HOST)
+
+	//使用 sftp 获取下载文件
+	sftpGet("/home/sybase/bin", client)
+
+	//读取配置，文件更新 mis.ini
+	myConfig := new(Config)
+	myConfig.InitConfig("mis.ini")
+	fmt.Println(myConfig.Read("MISINFO", "COUNTER_NO"))
+	fmt.Println("Application  end ... ...")
 }
